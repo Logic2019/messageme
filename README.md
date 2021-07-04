@@ -1,2 +1,5 @@
 # messageme
-a new messaging app
+A new messaging app
+
+Project Manual
+
