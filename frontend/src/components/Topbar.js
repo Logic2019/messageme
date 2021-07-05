@@ -11,7 +11,6 @@ export default function Topbar() {
       <div className="topbarCenter">
       <div className="searchbar">
           <input
-            placeholder="Search"
             className="searchInput"
           />
         </div>
