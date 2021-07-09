@@ -1,14 +1,22 @@
+import express from 'express';
+import { router } from './routes/user';
+
+
+
+
+
+
 const { MongoClient } = require("mongodb");
  
-// Replace the following with your Atlas connection string                                                                                                                                        
-const url = "mongodb+srv://logic:<password>@messagingapp.ioymf.mongodb.net/messagingappdb?retryWrites=true&w=majority";
+                                                                                                                                     
+const url = "mongodb+srv://logicdb:logicDB1@messagingapp.ioymf.mongodb.net/messagingappdb?retryWrites=true&w=majority";
+const client = new MongoClient(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
-
-const client = new MongoClient(url);
 async function run() {
     try {
         await client.connect();
-        console.log("Connected correctly to server");
+        console.log("Connected correctly to db server");
+
     } catch (err) {
         console.log(err.stack);
     }
@@ -16,4 +24,27 @@ async function run() {
         await client.close();
     }
 }
+
 run().catch(console.dir);
+ 
+
+const app = express();
+const port = 3000;
+app.use(express.json());
+app.use(express.json)
+app.use(express.urlencoded({extended: false}))
+app.use('/users',router);
+
+
+
+
+
+
+
+ 
+app.listen(port), (err:any) => {
+  if (err) {
+    return console.error(err);
+  }
+  return console.log(`server is listening on ${port}`);
+};
