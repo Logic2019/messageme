@@ -21,7 +21,7 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield client.connect();
-            console.log("Connected correctly to db server");
+            console.log("Connected correctly to mongoDB server");
         }
         catch (err) {
             console.log(err.stack);
