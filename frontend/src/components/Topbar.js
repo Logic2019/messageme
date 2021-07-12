@@ -9,11 +9,7 @@ export default function Topbar() {
        </div>
 
       <div className="topbarCenter">
-      <div className="searchbar">
-          <input
-            className="searchInput"
-          />
-        </div>
+      
       </div>
       <div className="topbarRight">
           <AuthNav />

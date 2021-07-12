@@ -40,10 +40,10 @@ export default function Messenger(){
     }, [arrivalMessage, currentChat]);
   
     useEffect(() => {
-      socket.current.emit("addUser", user._id);
+      socket.current.emit("addUser");
       socket.current.on("getUsers", (users) => {
         setOnlineUsers(
-          user.followings.filter((f) => users.some((u) => u.userId === f))
+          user.followings.filter((f) => users.some((u) => u === f))
         );
       });
     }, [user]);
@@ -58,7 +58,7 @@ export default function Messenger(){
         }
       };
       getConversations();
-    }, [user._id]);
+    }, );
   
     useEffect(() => {
       const getMessages = async () => {
@@ -119,7 +119,7 @@ export default function Messenger(){
             ))}
               <ChatOnline
               onlineUsers={onlineUsers}
-              currentId={user._id}
+              currentId={""}
               setCurrentChat={setCurrentChat}
             />
           
