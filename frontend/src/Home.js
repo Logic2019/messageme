@@ -4,12 +4,15 @@ import Topbar from "./components/Topbar";
 import Chat from "./components/chat/chat";
 import Message from "./components/message/message";
 import ChatOnline from "./components/chatOnline/chatOnline";
-
+import axios from "axios";
+import { io } from "socket.io-client";
+import { useContext, useEffect, useRef, useState } from "react";
+import { AuthContext } from "./components/context/AuthContext";
 
 
 export default function Messenger(){
 
-    const [conversations, setConversations] = useState([]);
+    const [chats, setConversations] = useState([]);
     const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState("");
@@ -108,11 +111,18 @@ export default function Messenger(){
             <div className = "chatMenu">
                 <div className = "chatMenuWrapper">
                     <p className = "chatMenuInput">Email</p>
-                    {conversations.map((c) => (
+                    {chats.map((c) => (
               <div onClick={() => setCurrentChat(c)}>
-                <Conversation conversation={c} currentUser={user} />
+                <Chat chat={c} currentUser={user} />
               </div>
+
             ))}
+              <ChatOnline
+              onlineUsers={onlineUsers}
+              currentId={user._id}
+              setCurrentChat={setCurrentChat}
+            />
+          
            </div>
             </div>
             <div className = "chatBox">

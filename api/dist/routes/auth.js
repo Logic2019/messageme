@@ -25,5 +25,18 @@ router.get("/register", (req, res) => __awaiter(void 0, void 0, void 0, function
     //save user and respond
     yield user.save();
     res.send("ok");
+    //LOGIN
+    router.post("/login", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            const user = yield User.findOne({ email: req.body.email });
+            !user && res.status(404).json("user not found");
+            const validPassword = yield bcrypt.compare(req.body.password, user.password);
+            !validPassword && res.status(400).json("wrong password");
+            res.status(200).json(user);
+        }
+        catch (err) {
+            res.status(500).json(err);
+        }
+    }));
 }));
 //# sourceMappingURL=auth.js.map
