@@ -1,32 +1,43 @@
 import express from 'express';
-import { router } from './routes/user';
-import helmet = require('helmet');
-import dotenv = require("dotenv");
-
-const app = express();;
-const mongoose = require("mongoose");
-const morgan = require("morgan");
-
- dotenv.config();
-                                                                                                                                     
- mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true, useUnifiedTopology: true},()=>{
-   console.log("Connected correctly to MongoDB")
- });
-
  
+const app = express();
+const port = 3000;
+const mongoose = require("mongoose");
+const helmet = require("helmet");
+const dotenv = require("dotenv");
+const morgan = require("morgan");
+const userRoute = require("./routes/user")
+const authRoute = require("./routes/auth")
+const covRoute = require("./routes/Converstion")
+const MessageRoute = require("./routes/Message")
+
+
+
+dotenv.config();
+
+mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true,useUnifiedTopology: true, useCreateIndex: true, })
+.then(() => console.log("Database connected!"))
+ .catch(err => console.log(err));
+
+
 app.use(express.json());
-app.use(express.json)
-app.use(express.urlencoded({extended: false}));
 app.use(helmet());
 app.use(morgan("common"));
 
+app.use("/api/user", userRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/conversation", covRoute);
+app.use("/api/message", MessageRoute);
 
-app.get("/" , (req , res)=>{
-  res.send('Welcome Home ')
-})
 
 
-app.listen(3000,() => {
+app.get('/', (req, res) => {
+  res.send("Welcome to the homepage");
+});
+app.get('/product', (req, res) => {
+  res.send("Welcome to the usepage");
+});
  
-  return console.log("server is listening");
+app.listen(port, () => {
+  return console.log(`server is listening on ${port}`);
 });

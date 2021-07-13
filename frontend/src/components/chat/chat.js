@@ -2,13 +2,12 @@ import "./chat.css"
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function Chat({ conversation, currentUser }) {
+export default function Chat({ chat, currentUser }) {
     
     const [user, setUser] = useState(null);
-    // const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   
     useEffect(() => {
-      const friendId = ((m) => m !== currentUser);
+      const friendId = chat?.members.find((m)=> m !==currentUser._id );
   
       const getUser = async () => {
         try {
@@ -19,7 +18,7 @@ export default function Chat({ conversation, currentUser }) {
         }
       };
       getUser();
-    }, [currentUser, conversation]);
+    }, [currentUser, chat]);
 
     return(
        <div className = " chat">

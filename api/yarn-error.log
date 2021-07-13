@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\Logic\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js start
+  C:\Program Files\nodejs\node.exe C:\Users\Logic\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add bycript
 
 PATH: 
   C:\Program Files (x86)\VMware\VMware Player\bin\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Files\cpp\bin\Intel64;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Java\jre1.8.0_221\bin;C:\Program Files\Java\jdk-13\bin;C:\xampp\php;C:\xampp\mysql\bin;C:\ProgramData\ComposerSetup\bin;C:\Program Files (x86)\dotnet\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\Logic\AppData\Local\Microsoft\WindowsApps;C:\Users\Logic\.dotnet\tools;C:\Users\Logic\AppData\Local\Microsoft\WindowsApps;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2019.2.4\bin;;C:\Program Files\JetBrains\IntelliJ IDEA 2019.3.2\bin;;C:\php;C:\Users\Logic\AppData\Local\ComposerSetup\bin;C:\Users\Logic\AppData\Roaming\Composer\vendor\bin;C:\Program Files\JetBrains\PhpStorm 2020.1\bin;;C:\Users\Logic\.dotnet\tools;C:\xampp\php;C:\xampp\php;C:\src\flutter\bin;C:\Program Files\nodejs\;C:\Users\Logic\AppData\Local\GitHubDesktop\bin;C:\Users\Logic\AppData\Roaming\npm;C:\Users\Logic\AppData\Local\Programs\Microsoft VS Code\bin
@@ -14,12 +14,17 @@ Platform:
   win32 x64
 
 Trace: 
-  SyntaxError: C:\Users\Logic\Desktop\messageme\messageme\api\package.json: Unexpected token } in JSON at position 152
-      at JSON.parse (<anonymous>)
-      at C:\Users\Logic\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:1625:59
-      at Generator.next (<anonymous>)
-      at step (C:\Users\Logic\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:310:30)
-      at C:\Users\Logic\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:321:13
+  Error: https://registry.yarnpkg.com/bycript: Not found
+      at Request.params.callback [as _callback] (C:\Users\Logic\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66988:18)
+      at Request.self.callback (C:\Users\Logic\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140662:22)
+      at Request.emit (events.js:375:28)
+      at Request.<anonymous> (C:\Users\Logic\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141634:10)
+      at Request.emit (events.js:375:28)
+      at IncomingMessage.<anonymous> (C:\Users\Logic\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141556:12)
+      at Object.onceWrapper (events.js:481:28)
+      at IncomingMessage.emit (events.js:387:35)
+      at endReadableNT (internal/streams/readable.js:1317:12)
+      at processTicksAndRejections (internal/process/task_queues.js:82:21)
 
 npm manifest: 
   {
@@ -28,7 +33,8 @@ npm manifest:
     "description": "",
     "main": "dist/app.js",
     "scripts": {
-      "start": "nodemon tsc && node dist/app.js",
+      "start": "tsc && node dist/app.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
     "license": "ISC",
@@ -47,7 +53,8 @@ npm manifest:
       "mongo": "^0.1.0",
       "mongodb": "^3.6.9",
       "mongoose": "^5.13.2",
-      "morgan": "^1.10.0"
+      "morgan": "^1.10.0",
+      "nodemon": "^2.0.12"
     }
   }
 

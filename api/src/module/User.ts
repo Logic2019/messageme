@@ -1,48 +1,35 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
-
-interface UserI{
-    username: string;
-    email: string;
-    password: string;
-}
-
-interface UserDocument extends mongoose.Document{
-    username: string;
-    email: string;
-    password: string;
-}
-
-const userSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema(
+  {
     username: {
-        type: String,
-
+      type: String,
+      require: true,
+      min: 3,
+      max: 20,
+      unique: true,
     },
     email: {
-        type: String,
-       
+      type: String,
+      required: true,
+      max: 50,
+      unique: true,
     },
     password: {
-        type: String,
-       
+      type: String,
+      required: true,
+      min: 6,
     },
-})
+    profilePicture: {
+      type: String,
+      default: "",
+    },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  { timestamps: true }
+);
 
-
-interface userModelInterface extends mongoose.Model<UserDocument>{
-    set(x: UserI):  UserDocument;
-}
-
-userSchema.statics.set = (x: UserI) => {
-    return new User();
-};
-
-const User = mongoose.model<UserDocument,userModelInterface>('User',userSchema);
-
-User.set({
-    username: "username",
-    email: "email",
-    password: "password",
-})
-
-export {User}
+module.exports = mongoose.model("User", UserSchema);
