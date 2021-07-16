@@ -1,0 +1,21 @@
+.login{
+    width: 90vw;
+    height: 90vh;
+    background-color: #f0f2f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loginWrapper {
+    width: 40%;
+    display: flex;
+  }
+  .loginButton{
+    width: 120px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(202, 14, 29);
+    color: white;
+}

@@ -1,29 +1,12 @@
 import "./topbar.css";
-import AuthNav from "./auth-nav";
+import LogoutButton from "../components/Logout";
+
 
 export default function Topbar() {
   return (
     <div className="topbarContainer">
-<div className="topbarLeft">
-
-       </div>
-
-      <div className="topbarCenter">
-      
-      </div>
+        <LogoutButton/>
       <div className="topbarRight">
-          <AuthNav />
-        <div className="topbarIcons">
-          <div className="topbarIconItem">
-           
-          </div>
-          <div className="topbarIconItem">
-          
-          </div>
-          <div className="topbarIconItem">
-           
-          </div>
-        </div>
        
       </div>
     </div>

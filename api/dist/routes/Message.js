@@ -9,6 +9,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const routee = require("express").Router();
 const Message = require("../module/Message");
+//add messages
+routee.post("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
+    const newMessage = new Message(req.body);
+    try {
+        const savedMessage = yield newMessage.save();
+        res.status(200).json(savedMessage);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+}));
 //get messages
 routee.get("/:conversationId", (req, res) => __awaiter(this, void 0, void 0, function* () {
     try {
@@ -16,17 +27,6 @@ routee.get("/:conversationId", (req, res) => __awaiter(this, void 0, void 0, fun
             conversationId: req.params.conversationId,
         });
         res.status(200).json(messages);
-    }
-    catch (err) {
-        res.status(500).json(err);
-    }
-}));
-//add messages
-routee.post("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
-    const newMessage = new Message(req.body);
-    try {
-        const savedMessage = yield newMessage.save();
-        res.status(200).json(savedMessage);
     }
     catch (err) {
         res.status(500).json(err);

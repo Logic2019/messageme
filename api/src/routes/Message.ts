@@ -3,17 +3,6 @@ const Message = require("../module/Message");
 
 
 
-//get messages
-routee.get("/:conversationId", async (req, res) => {
-  try {
-    const messages = await Message.find({
-      conversationId: req.params.conversationId,
-    });
-    res.status(200).json(messages);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
 //add messages
 routee.post("/", async (req, res) => {
     const newMessage = new Message(req.body);
@@ -25,5 +14,18 @@ routee.post("/", async (req, res) => {
       res.status(500).json(err);
     }
   });
+
+//get messages
+routee.get("/:conversationId", async (req, res) => {
+  try {
+    const messages = await Message.find({
+      conversationId: req.params.conversationId,
+    });
+    res.status(200).json(messages);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
 module.exports = routee;

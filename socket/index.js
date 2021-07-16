@@ -20,8 +20,8 @@ const io = require("socket.io")(8900, {
   };
   
   io.on("connection", (socket) => {
-    // ceonnect
-    console.log("a user connected.");
+    // connect
+    console.log("user connected.");
   
     //keep userId and socketId from user
     socket.on("addUser", (userId) => {
@@ -29,7 +29,7 @@ const io = require("socket.io")(8900, {
       io.emit("getUsers", users);
     });
   
-    //send and get message
+    //send a message and get message
     socket.on("sendMessage", ({ senderId, receiverId, text }) => {
       const user = getUser(receiverId);
       io.to(user.socketId).emit("getMessage", {
@@ -40,7 +40,7 @@ const io = require("socket.io")(8900, {
   
     //when disconnect
     socket.on("disconnect", () => {
-      console.log("a user disconnected!");
+      console.log("user disconnected");
       removeUser(socket.id);
       io.emit("getUsers", users);
     });

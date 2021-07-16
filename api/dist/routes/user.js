@@ -21,6 +21,21 @@ var __rest = (this && this.__rest) || function (s, e) {
 const Users = require("../module/User");
 const bycrypt = require("bcrypt");
 const router = require("express").Router();
+//get a user
+router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
+    const userId = req.query.userId;
+    const username = req.query.username;
+    try {
+        const user = userId
+            ? yield Users.findById(userId)
+            : yield Users.findOne({ username: username });
+        const _a = user._doc, { password, updatedAt } = _a, other = __rest(_a, ["password", "updatedAt"]);
+        res.status(200).json(other);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+}));
 router.put("/:id", (req, res) => __awaiter(this, void 0, void 0, function* () {
     if (req.body.userId === req.params.id || req.body.isAdmin) {
         if (req.body.password) {
@@ -44,21 +59,6 @@ router.put("/:id", (req, res) => __awaiter(this, void 0, void 0, function* () {
     }
     else {
         return res.status(403).json("You can update only your account!");
-    }
-}));
-//get a user
-router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
-    const userId = req.query.userId;
-    const username = req.query.username;
-    try {
-        const user = userId
-            ? yield User.findById(userId)
-            : yield User.findOne({ username: username });
-        const _a = user._doc, { password, updatedAt } = _a, other = __rest(_a, ["password", "updatedAt"]);
-        res.status(200).json(other);
-    }
-    catch (err) {
-        res.status(500).json(err);
     }
 }));
 //delete user
