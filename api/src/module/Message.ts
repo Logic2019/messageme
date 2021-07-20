@@ -5,7 +5,7 @@ const MessageSchema = new mongoo.Schema(
     conversationId: {
       type: String,
     },
-    sender: {
+    senderId: {
       type: String,
     },
     text: {

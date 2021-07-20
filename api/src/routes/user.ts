@@ -24,8 +24,8 @@ router.get("/", async (req, res) => {
   }
 });
 
-//get friends
-router.get("/friends/:userId", async (req, res) => {
+//get online friends
+router.get("/:userId", async (req, res) => {
   try {
     const user = await User.findById(req.params.userId);
     const friends = await Promise.all(
@@ -34,10 +34,6 @@ router.get("/friends/:userId", async (req, res) => {
       })
     );
     let friendList = [];
-    friends.map((friend) => {
-      const {  username, picture } = friend;
-      friendList.push({ username, picture });
-    });
     res.status(200).json(friendList)
   } catch (err) {
     res.status(500).json(err);

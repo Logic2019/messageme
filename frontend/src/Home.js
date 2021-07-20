@@ -38,7 +38,7 @@ export default function Messenger(){
 
 
   useEffect(() => {
-    socket.current?.emit("addUser", user?._id);
+    socket.current?.emit("addUser", user?.sub);
     socket.current?.on("getUsers", (users) => {
       setOnlineUsers(
         user?.data.filter((f) => users.some((u) => u.userId === f))
@@ -51,6 +51,7 @@ export default function Messenger(){
       try {
         const res = await axios.get("conversation/" + user.sub.slice(6));
         setChat(res.data);
+        // console.log(res)
       } catch (err) {
         console.log(err);
       }
@@ -69,11 +70,13 @@ export default function Messenger(){
     });
   }, []);
 
+  // set current chat of user
   useEffect(() => {
     const getMessages = async () => {
       try {
-        const res = await axios.get("/message/" + currentChat?._id);
+        const res = await axios.get("/message/" + currentChat._id);
         setMessages(res.data);
+        // console.log(currentChat)
       } catch (err) {
         console.log(err);
       }
@@ -86,25 +89,25 @@ export default function Messenger(){
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = {
-      sender: user._id,
+      senderId: user.sub.slice(6),
       text: newMessage,
       conversationId: currentChat._id,
     };
 
-    const receiverId = currentChat.members.find(
-      (member) => member !== user._id
-    );
+    // const receiverId = currentChat.members.find(
+    //   (member) => member !== user._id
+    // );
 
-    socket.current.emit("sendMessage", {
-      senderId: user._id,
-      receiverId,
-      text: newMessage,
-    });
+    // socket.current.emit("sendMessage", {
+    //   senderId: user._id,
+    //   receiverId,
+    //   text: newMessage,
+    // });
 
     try {
       const res = await axios.post("/message", message);
       setMessages([...messages, res.data]);
-      setNewMessage("");
+      setNewMessage('');
     } catch (err) {
       console.log(err);
     }
@@ -113,7 +116,6 @@ export default function Messenger(){
   if(isLoading){
     return <div>Loading...</div>
 }
-
 
     return(
 
@@ -125,7 +127,7 @@ export default function Messenger(){
                     <div className = "chatMenuInput">
                       <Profile/>
                     </div>
-                 {chats.map((c)=>(
+                 {chats.map(c=>(
                    <div onClick={()=>setCurrentChat(c)}>
                    <Chat chat={c} currentUser = {user}/>
                    </div>
@@ -140,7 +142,7 @@ export default function Messenger(){
                 <div  className = "chatBoxTop">
                 {messages.map((m) => (
                     <div ref={scrollRef}>
-                      <Message message={m} own={m.sender === user._id} />
+                      <Message message={m} own={m.senderId === user.sub.slice(6)} />
                     </div>
                   ))}
                    

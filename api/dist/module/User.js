@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
-    username: {
+    nikname: {
         type: String,
         require: true,
         min: 3,
@@ -23,5 +23,5 @@ const UserSchema = new mongoose.Schema({
         default: "",
     },
 }, { timestamps: true });
-module.exports = mongoose.model("User", UserSchema);
+module.exports = mongoose.model("Users", UserSchema);
 //# sourceMappingURL=User.js.map

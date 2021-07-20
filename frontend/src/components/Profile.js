@@ -11,7 +11,7 @@ const Profile=()=>{
             isAuthenticated && (
                 <div>
                     <h2>{user.email}</h2>
-                    <p>{user.username}</p>
+                    <p>{user.nickname}</p>
                 </div>
             )
     )

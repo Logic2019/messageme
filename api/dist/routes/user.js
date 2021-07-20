@@ -36,6 +36,20 @@ router.get("/", (req, res) => __awaiter(this, void 0, void 0, function* () {
         res.status(500).json(err);
     }
 }));
+//get online friends
+router.get("/:userId", (req, res) => __awaiter(this, void 0, void 0, function* () {
+    try {
+        const user = yield User.findById(req.params.userId);
+        const friends = yield Promise.all(user.followings.map((friendId) => {
+            return User.findById(friendId);
+        }));
+        let friendList = [];
+        res.status(200).json(friendList);
+    }
+    catch (err) {
+        res.status(500).json(err);
+    }
+}));
 router.put("/:id", (req, res) => __awaiter(this, void 0, void 0, function* () {
     if (req.body.userId === req.params.id || req.body.isAdmin) {
         if (req.body.password) {
